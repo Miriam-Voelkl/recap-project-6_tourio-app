@@ -18,6 +18,11 @@ export default async function handler(request, response) {
       const placeData = request.body;
       await Place.findByIdAndUpdate(id, placeData);
       return response.status(200).json({ status: `Place ${id} updated!` });
+    } else if (request.method === "DELETE") {
+      await Place.findByIdAndDelete(id);
+      return response
+        .status(200)
+        .json({ status: `Place ${id} successfully deleted.` });
     } else {
       response
         .status(405)
